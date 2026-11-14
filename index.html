@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#101619" />
+  <title>Ballots & Blades — The Gilded Wilds</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Marcellus&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:," />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main id="game-shell">
+    <canvas id="world" aria-label="3D fantasy game world"></canvas>
+    <div class="vignette"></div>
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Ballots and Blades home"><span class="brand-mark">✦</span><span>BALLOTS <i>&</i> BLADES</span></a>
+      <div class="region-pill"><span class="live-dot"></span> THE GILDED WILDS <span class="coords">· 01</span></div>
+      <div class="top-actions"><button class="icon-btn" id="map-btn" title="Map (M)">⌖</button><button class="icon-btn" id="sound-btn" title="Sound">♫</button><button class="avatar-mini">✦</button></div>
+    </header>
+    <section class="player-panel">
+      <div class="portrait"><span>♙</span><b>18</b></div>
+      <div class="player-info"><div class="player-line"><strong>Rowan of the Common</strong><span class="class-tag">WARDEN</span></div><div class="xp-track"><i></i></div><div class="xp-label">LEVEL 18 <span>·</span> 2,460 / 3,200 RENOWN</div></div>
+      <div class="resource-bars"><div class="bar hp"><span></span></div><div class="bar vigor"><span></span></div></div>
+    </section>
+    <section class="quest-card"><div class="quest-kicker"><span>✦</span> ACTIVE CONTRACT</div><h2>Clean House</h2><p>Send the crooked council packing.</p><div class="quest-objective"><span class="objective-dot"></span><span id="quest-text">Defeat the Corrupt Magistrate</span><b id="quest-count">0 / 3</b></div><div class="reward-line">REWARD <span>◈ 240</span> <span>✧ 180 RENOWN</span></div></section>
+    <section class="minimap"><div class="map-title">THE GILDED WILDS <span>N ·</span></div><div class="map-canvas"><div class="map-grid"></div><i class="map-road road-a"></i><i class="map-road road-b"></i><i class="map-forest f1"></i><i class="map-forest f2"></i><i class="map-forest f3"></i><i class="map-player">▲</i><i class="map-enemy e1">◆</i><i class="map-enemy e2">◆</i><i class="map-dungeon">⬟</i><span class="map-label">BRIBEWOOD</span></div><div class="map-footer"><span><i class="legend player-legend"></i>You</span><span><i class="legend enemy-legend"></i>Hostile</span><span><i class="legend dungeon-legend"></i>Delve</span></div></section>
+    <section class="objective-toast" id="toast"><span>✧</span><div><b>NEW OBJECTIVE</b><small>Explore the wilds and confront the council</small></div></section>
+    <div class="interaction" id="interaction"><span class="keycap">E</span><span id="interaction-text">Collect loot</span></div>
+    <div class="combat-float" id="combat-float">-24</div>
+    <section class="hotbar-wrap"><div class="hotbar-top"><span class="hotbar-hint"><kbd>W A S D</kbd> MOVE <i>·</i> <kbd>CLICK</kbd> ATTACK <i>·</i> <kbd>SHIFT</kbd> DODGE</span><span class="hotbar-hint right"><kbd>I</kbd> INVENTORY <i>·</i> <kbd>J</kbd> JOURNAL</span></div><div class="hotbar"><button class="skill-slot selected" data-skill="strike"><span class="skill-art art-strike">⚔</span><kbd>1</kbd></button><button class="skill-slot" data-skill="sweep"><span class="skill-art art-sweep">⟳</span><kbd>2</kbd><i class="cooldown"></i></button><button class="skill-slot" data-skill="shout"><span class="skill-art art-shout">✹</span><kbd>3</kbd><i class="cooldown"></i></button><button class="skill-slot" data-skill="potion"><span class="skill-art art-potion">♜</span><kbd>4</kbd></button><span class="hotbar-divider"></span><div class="weapon-chip"><span>♜</span><small>IRONBARK<br>GREATAXE</small></div><div class="loot-counter"><span>◈</span><b id="currency">1,240</b><small>SEALS</small></div><button class="bag-button" id="bag-btn"><span>▤</span><b>BAG</b><i id="bag-count">06</i></button></div></section>
+    <nav class="mobile-controls"><button id="mobile-left">◀</button><button id="mobile-up">▲</button><button id="mobile-down">▼</button><button id="mobile-right">▶</button><button id="mobile-attack">⚔</button></nav>
+    <div class="modal-backdrop" id="modal-backdrop"><div class="modal" id="modal"><button class="modal-close" id="modal-close">×</button><div class="modal-kicker">FIELD SATCHEL · <span id="inventory-capacity">6 / 32</span></div><h1>Adventurer's Pack</h1><div class="inventory-layout"><div class="inventory-grid" id="inventory-grid"></div><aside class="item-detail" id="item-detail"><div class="detail-icon">⚔</div><div class="detail-empty">Select an item<br>to inspect its traits.</div></aside></div><div class="modal-footer"><span>TIP: Better gear drops from deeper delves.</span><button class="gold-button" id="equip-btn" disabled>EQUIP ITEM</button></div></div></div>
+    <div class="journal-backdrop" id="journal-backdrop"><div class="journal"><button class="modal-close" id="journal-close">×</button><div class="modal-kicker">YOUR STORY SO FAR</div><h1>Field Journal</h1><div class="journal-row"><span class="journal-icon">⚑</span><div><b>Clean House</b><small>Defeat the Corrupt Magistrates that prey on the Gilded Wilds.</small><em>MAIN CONTRACT · LEVEL 16</em></div><span class="journal-progress" id="journal-progress">0 / 3</span></div><div class="journal-row"><span class="journal-icon">⬟</span><div><b>The Ledger Vault</b><small>A sealed entrance lies beyond the old toll bridge.</small><em>DELVE · RECOMMENDED LEVEL 20</em></div><span class="journal-progress">UNFOUND</span></div><div class="journal-note">“The people have had their fill of speeches. Let steel do the talking.”<br><small>— Captain Bramble</small></div></div></div>
+    <div class="level-toast" id="level-toast">✧ <span>CONTRACT COMPLETE</span> ✧</div>
+    <div class="dungeon-card" id="dungeon-card"><span class="dungeon-symbol">⬟</span><div><b>THE LEDGER VAULT</b><small>DEEP DELVE · RECOMMENDED LEVEL 20</small></div><button id="enter-dungeon">ENTER <span>→</span></button></div>
+    <div class="screen-fade" id="screen-fade"></div>
+  </main>
+  <script type="module" src="game.js"></script>
+</body>
+</html>
